@@ -7,6 +7,7 @@ import UseReducerHook from "./components/use-reducer-hook";
 import UseMemoAndCallbackHook from "./components/use-memo-and-context-hook";
 import UseImperativeHandleHook from "./components/use-imperative-handle-hook";
 import UseEffectPolyFillComponent from './components/use-effect-polyfill';
+import UseMemoPolyFillComponent from "./components/use-memo-polyfill-component";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <UseContextHook />
       <UseReducerHook />
       <UseMemoAndCallbackHook />
+      <UseMemoPolyFillComponent />
       <UseImperativeHandleHook />
     </div>
   );
