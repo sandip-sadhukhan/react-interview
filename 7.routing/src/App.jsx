@@ -4,7 +4,7 @@ import {RouterProvider, createBrowserRouter} from "react-router-dom"
 import AppLayout from './layouts/app-layout'
 import Home from './pages/home'
 import PostList, { postLoader } from './pages/post-list'
-import PostComments from './pages/post-comments'
+import PostComments, { postCommentLoader } from './pages/post-comments'
 
 const router = createBrowserRouter([
   {
@@ -21,7 +21,8 @@ const router = createBrowserRouter([
       },
       {
         path: "/posts/:postId",
-        element: <PostComments />
+        element: <PostComments />,
+        loader: postCommentLoader,
       },
     ]
   }

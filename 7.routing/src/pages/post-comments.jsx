@@ -1,43 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useLoaderData, useNavigate, useParams } from 'react-router-dom'
 
 const PostComments = () => {
-  const [comments, setComments] = useState([]);
-  const [post, setPost] = useState(null);
-  const [loading, setLoading] = useState(false);
-
-  const {postId} = useParams();
+  const dataList = useLoaderData();
+  const post = dataList[0];
+  const comments = dataList[1];
 
   const navigate = useNavigate()
-
-  const fetchData = async () => {
-    setLoading(true);
-
-    try {
-      const responseList = await Promise.all([
-        fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`),
-        fetch(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`)
-      ]);
-      const dataList = await Promise.all([
-        responseList[0].json(),
-        responseList[1].json(),
-      ])
-
-      setPost(dataList[0])
-      setComments(dataList[1])
-    } catch(error) {
-      console.error("Error fetching posts: ", error);
-    }
-    setLoading(false);
-  }
-
-  useEffect(() => {
-    fetchData();
-  }, [postId])
-
   return (
     <div>
-      {loading ? <p>Loading...</p> : (
         <div>
           {post && (
             <div className='post-card'>
@@ -55,17 +26,23 @@ const PostComments = () => {
             ))}
           </ul>
         </div>
-      )}
 
       <button onClick={() => navigate(-1)}>Go back</button>
     </div>
   )
 }
 
-export async function postCommentLoader() {
-  const response = await fetch("https://jsonplaceholder.typicode.com/users/1/posts?limit=50");
-  const data = await response.json();
-  return data;
+export async function postCommentLoader({params}) {
+  const postId = params.postId;
+  const responseList = await Promise.all([
+    fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`),
+    fetch(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`)
+  ]);
+  const dataList = await Promise.all([
+    responseList[0].json(),
+    responseList[1].json(),
+  ])
+  return dataList;
 }
 
 export default PostComments
