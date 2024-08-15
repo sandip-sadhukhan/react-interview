@@ -3,7 +3,7 @@ import './App.css'
 import {RouterProvider, createBrowserRouter} from "react-router-dom"
 import AppLayout from './layouts/app-layout'
 import Home from './pages/home'
-import PostList from './pages/post-list'
+import PostList, { postLoader } from './pages/post-list'
 import PostComments from './pages/post-comments'
 
 const router = createBrowserRouter([
@@ -16,7 +16,8 @@ const router = createBrowserRouter([
       },
       {
         path: "/posts",
-        element: <PostList />
+        element: <PostList />,
+        loader: postLoader,
       },
       {
         path: "/posts/:postId",
