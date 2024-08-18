@@ -6,10 +6,12 @@ import Home from './pages/home'
 import PostList, { postLoader } from './pages/post-list'
 import PostComments, { postCommentLoader } from './pages/post-comments'
 import Header from './components/header'
+import Error from './components/error'
 
 const router = createBrowserRouter([
   {
     element: <AppLayout />,
+    errorElement: <Error />,
     children: [
       {
         path: "/",
