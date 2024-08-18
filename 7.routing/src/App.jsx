@@ -10,6 +10,7 @@ import Error from './components/error'
 import Login from './components/login'
 import SignUp from './components/signup'
 import RequireAuth from './components/require-auth'
+import Product from './pages/products'
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
         element: <PostComments />,
         loader: postCommentLoader,
       },
+      {
+        path: "/product",
+        element: <Product />
+      }
     ]
   }
 ])
