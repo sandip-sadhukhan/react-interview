@@ -8,6 +8,7 @@ const Login = () => {
     e.preventDefault();
 
     if (e.target.email.value && e.target.password.value) {
+      localStorage.setItem("loggedIn", true);
       navigate("/posts")
     }
   }

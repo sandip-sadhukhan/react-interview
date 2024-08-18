@@ -9,6 +9,7 @@ import Header from './components/header'
 import Error from './components/error'
 import Login from './components/login'
 import SignUp from './components/signup'
+import RequireAuth from './components/require-auth'
 
 const router = createBrowserRouter([
   {
@@ -31,7 +32,9 @@ const router = createBrowserRouter([
       },
       {
         path: "/posts",
-        element: <PostList />,
+        element: <RequireAuth>
+            <PostList />
+          </RequireAuth>,
         loader: postLoader,
       },
       {
